@@ -40,7 +40,6 @@ function render(variables = {}) {
     twitter
   } = variables;
 
-  console.log(twitter);
   let cover = `<div class="cover"><img src="${background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
@@ -60,24 +59,34 @@ function render(variables = {}) {
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>${nameVariable == "" ? "Andrea" : nameVariable} ${
-    lastNameVariable == "" ? "Aguilar" : lastNameVariable
+          <h1>${nameVariable == "" ? "Name" : nameVariable} ${
+    lastNameVariable == "" ? "Last Name" : lastNameVariable
   }</h1>
-          <h2>${role ? role : "Web developer"}</h2>
+          <h2>${role ? role : ""}</h2>
 
-          <h3>${city ? city : "Miami"}, ${country ? country : "USA"}</h3>
+          <h3>${city ? `${city} ,` : "City"} ${
+    country ? country : "Country"
+  }</h3>
           <ul class=${socialMediaPosition}>
             <li><a href="${
-              twitter ? twitter : "https://twitter.com/4geeksacademy"
+              twitter
+                ? `https://twitter.com/${twitter}`
+                : "https://twitter.com/4geeksacademy"
             }"><i class="fab fa-twitter"></i></a></li>
             <li><a href="${
-              github ? github : "https://github.com/4geeksacademy"
+              github
+                ? `https://github.com/${github}`
+                : "https://github.com/4geeksacademy"
             }"><i class="fab fa-github"></i></a></li>
             <li><a href="${
-              linkedin ? linkedin : "https://linkedin.com/school/4geeksacademy"
+              linkedin
+                ? `https://linkedin.com/${linkedin}`
+                : "https://linkedin.com/school/4geeksacademy"
             }"><i class="fab fa-linkedin"></i></a></li>
             <li><a href="${
-              instagram ? instagram : "https://instagram.com/4geeksacademy"
+              instagram
+                ? `https://instagram.com/${instagram}`
+                : "https://instagram.com/4geeksacademy"
             }"><i class="fab fa-instagram"></i></a></li>
           </ul>
         </div>
