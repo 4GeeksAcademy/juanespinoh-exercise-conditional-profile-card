@@ -26,21 +26,59 @@ function render(variables = {}) {
   console.log("These are the current variables: ", variables); // print on the console
   // here we ask the logical questions to make decisions on how to build the html
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
-  let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
+  const {
+    background,
+    name,
+    lastName,
+    role,
+    country,
+    city,
+    socialMediaPosition,
+    linkedin,
+    instagram,
+    github,
+    twitter
+  } = variables;
+
+  console.log(twitter);
+  let cover = `<div class="cover"><img src="${background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
+
+  let nameVariable = name
+    ? name.length > 10
+      ? `${name.slice(0, 10)}...`
+      : name
+    : "";
+
+  let lastNameVariable = lastName
+    ? lastName.length > 10
+      ? `${lastName.slice(0, 10)}...`
+      : lastName
+    : "";
 
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
+          <h1>${nameVariable == "" ? "Andrea" : nameVariable} ${
+    lastNameVariable == "" ? "Aguilar" : lastNameVariable
+  }</h1>
+          <h2>${role ? role : "Web developer"}</h2>
+
+          <h3>${city ? city : "Miami"}, ${country ? country : "USA"}</h3>
+          <ul class=${socialMediaPosition}>
+            <li><a href="${
+              twitter ? twitter : "https://twitter.com/4geeksacademy"
+            }"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="${
+              github ? github : "https://github.com/4geeksacademy"
+            }"><i class="fab fa-github"></i></a></li>
+            <li><a href="${
+              linkedin ? linkedin : "https://linkedin.com/school/4geeksacademy"
+            }"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="${
+              instagram ? instagram : "https://instagram.com/4geeksacademy"
+            }"><i class="fab fa-instagram"></i></a></li>
           </ul>
         </div>
     `;
